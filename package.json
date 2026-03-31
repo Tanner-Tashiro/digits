@@ -28,7 +28,6 @@
     "react-hook-form": "^7.71.2",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.26.21",
-    "ts-node": "^10.9.2",
     "yup": "^1.7.1"
   },
   "devDependencies": {
@@ -42,6 +41,7 @@
     "eslint-config-next": "16.1.6",
     "eslint-config-prettier": "^10.1.8",
     "prisma": "^7.4.2",
+    "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
