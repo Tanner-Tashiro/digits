@@ -1,6 +1,6 @@
 'use server';
 
-import { Condition } from '@prisma/client';
+import { Condition, Contact } from '@prisma/client';
 import { Stuff } from '@prisma/client';
 import { hash } from 'bcrypt';
 import { redirect } from 'next/navigation';
@@ -92,4 +92,47 @@ export async function changePassword(credentials: { email: string; password: str
       password,
     },
   });
+}
+
+/**
+ * Creates a new contact in the database.
+ * @param contact, an object with the following properties: firstName, lastName, address, image, description, owner.
+ */
+export async function addContact(contact: {
+  firstName: string;
+  lastName: string; 
+  address: string; 
+  image: string; 
+  description: string; 
+  owner: string 
+}) {
+  await prisma.contact.create({
+    data: {
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      address: contact.address,
+      image: contact.image,
+      description: contact.description,
+      owner: contact.owner,
+    },
+  });
+  redirect('/list');
+}
+
+/**
+ * Edits an existing contact in the database.
+ * @param contact, an object with the following properties: id, firstName, lastName, address, image, description.
+ */
+export async function editContact(contact: Contact) {
+  await prisma.contact.update({
+    where: { id: contact.id },
+    data: {
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      address: contact.address,
+      image: contact.image,
+      description: contact.description,
+    },
+  });
+  redirect('/list');
 }

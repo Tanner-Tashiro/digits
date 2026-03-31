@@ -1,13 +1,15 @@
 "use client";
 
-import { Contact } from '@/lib/validationSchemas';
+import { Contact } from '@prisma/client';
 import { Card, CardTitle } from 'react-bootstrap';
+import Link from 'next/link';
+import Image from 'next/image';
 
 /* Renders a single Contact. */
 const ContactCard = ({ contact }: { contact: Contact }) => (
   <Card className="h-100">
     <Card.Header className="text-left">
-      <img
+      <Image
         src={contact.image}
         alt={`${contact.firstName} ${contact.lastName}`}
         width={75}
@@ -21,6 +23,9 @@ const ContactCard = ({ contact }: { contact: Contact }) => (
     <Card.Body>
       <Card.Text>{contact.description}</Card.Text>
     </Card.Body>
+    <Card.Footer>
+      <Link href={`edit/${contact.id}`}>Edit</Link>
+    </Card.Footer>
   </Card>
 );
 
