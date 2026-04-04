@@ -1,11 +1,12 @@
 "use client";
 
-import { Contact } from '@prisma/client';
-import { Card, CardTitle } from 'react-bootstrap';
+import { Contact, Note } from '@prisma/client';
+import { Card, CardTitle, ListGroup } from 'react-bootstrap';
+import NoteItem from '@/components/NoteItem';
 import Image from 'next/image';
 
 /* Renders a single Contact. */
-const ContactCardAdmin = ({ contact }: { contact: Contact }) => (
+const ContactCardAdmin = ({ contact, notes }: { contact: Contact; notes: Note[] }) => (
   <Card className="h-100">
     <Card.Header className="text-left">
       <Image
@@ -21,7 +22,10 @@ const ContactCardAdmin = ({ contact }: { contact: Contact }) => (
     </Card.Header>
     <Card.Body>
       <Card.Text>{contact.description}</Card.Text>
-      <p className = "bloackquote-footer">{contact.owner}</p>
+      <ListGroup variant="flush">
+        {notes.map((note) => <NoteItem key={note.id} note={note}/>)}
+      </ListGroup>
+      <p className = "blockquote-footer">{contact.owner}</p>
     </Card.Body>
   </Card>
 );
